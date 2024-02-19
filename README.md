@@ -19,3 +19,5 @@ This will take you to the current application template.
 - `pysonic/` is our root directory for our application. 
 - `App.jsx` is the main application container where we will house all of our components. We will not develop any components here.
 - `components/` is where we will develop components, `Grid.jsx` is currently in that folder and is placed in the App container. It is not a grid yet just a button but it is done this way for the purpose of demonstrating how to factor out components.
+
+Note: this project was inspired by [Ally IDE](https://ally-ide.herokuapp.com)
