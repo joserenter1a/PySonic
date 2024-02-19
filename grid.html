@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid</title>
+<style>
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 1px;
+    border: 1px solid #ccc;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+.header-cell {
+    font-weight: bold;
+}
+
+.number-header {
+    grid-column: 1;
+    grid-row: span 1;
+}
+
+.letter-header {
+    grid-row: 1;
+    grid-column: span 1;
+}
+
+.input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div class="grid-container" id="grid-container"></div>
+<div id="input-history"></div> <!-- Print area for input history -->
+<div class="button-container">
+    <button class="show-button" onclick="showInputHistory()">Show Input History</button>
+</div>
+
+<script>
+// Get reference to the grid container
+const gridContainer = document.getElementById('grid-container');
+const inputHistoryContainer = document.getElementById('input-history');
+
+const inputLines = [];
+
+// Function to create grid cells
+function createCell(content, isHeader) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    if (isHeader) {
+        cell.classList.add('header-cell');
+        cell.textContent = content;
+    } else {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.classList.add('input');
+        input.value = '';
+        input.addEventListener('input', function(event) {
+            const inputValue = event.target.value;
+            const rowIndex = Array.from(gridContainer.children).indexOf(event.target.parentElement);
+            inputLines[rowIndex - 1] = inputValue; // Subtract 1 for the header row
+            updateInputHistory();
+        });
+
+        cell.appendChild(input);
+    }
+    return cell;
+}
+
+// Generate the grid
+function generateGrid(rows, cols) {
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            const isHeader = i === 0 || j === 0;
+            const content = isHeader ? (i === 0 ? String.fromCharCode(65 + j - 1) : i) : '';
+            const cell = createCell(content, isHeader);
+            gridContainer.appendChild(cell);
+        }
+    }
+}
+
+// Call the function to generate the grid
+generateGrid(6, 6);
+function updateInputHistory() {
+    inputHistoryContainer.innerHTML = '';
+    inputLines.forEach(function(line) {
+        const div = document.createElement('div');
+        div.textContent = line || ''; // If line is undefined (empty), display an empty string
+        inputHistoryContainer.appendChild(div);
+    });
+}
+function showInputHistory() {
+    updateInputHistory();
+}
+
+
+</script>
+
+</body>
+</html>
