@@ -17,7 +17,10 @@ This will take you to the current application template.
 ### Project Strcuture
 
 - `pysonic/` is our root directory for our application. 
-- `App.jsx` is the main application container where we will house all of our components. We will not develop any components here.
-- `components/` is where we will develop components, `Grid.jsx` is currently in that folder and is placed in the App container. It is not a grid yet just a button but it is done this way for the purpose of demonstrating how to factor out components.
+- `src/App.jsx` is the main application container where we will house all of our components. We will not develop any components here.
+- `src/components/` is where we will develop components, `Grid.jsx` is currently in that folder and is placed in the App container. It is not a grid yet just a button that updates a count but it is done this way for the purpose of demonstrating how to factor out components.
+- `Compiler.jsx` provides a python editor with both input and output. You can toggle an IgnoreTabKey prop which determines whether the editor should ignore tab key presses so that keyboard users can tab past the editor. Users can toggle this behaviour using `Ctrl+Shift+M (Mac)` /` Ctrl+M` manually when this is false
+    - NOTE: The input needs to be changed to a grid based input.
+    - A button for surveying the code still needs to be added
 
 Note: this project was inspired by [Ally IDE](https://ally-ide.herokuapp.com)

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css'
 // import custom component to embed in our application container
 import { Grid } from './components/Grid';
+import Compiler from './compiler/Compiler';
 
 function App() {
 
@@ -12,9 +13,10 @@ function App() {
           <div>
             <Grid/>
           </div>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test 
-        </p>
+        <div>
+          <Compiler/>
+
+        </div>
       </div>
 
 
