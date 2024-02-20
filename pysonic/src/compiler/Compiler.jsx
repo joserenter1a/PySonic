@@ -178,18 +178,24 @@ Buzz
     setIsLoadingSubmit(true);
     const testCase = testCases[0];
     const userCode = code;
-    const testResult = await runTestCase(userCode, testCase.expectedOutput);
+    // const testResult = await runTestCase(userCode, testCase.expectedOutput);
 
-    if (testResult === 'Test Failed!') {
-      setError(true);
-      const finalOutput = `${testResult}\n\nExpected Output:\n${testCase.expectedOutput}`;
-      setOutput(finalOutput); 
-      setIsLoadingSubmit(false);
-    } else {
-      const finalOutput = `${testResult}\n\nYour Output:\n${testCase.expectedOutput}`;
-      setOutput(finalOutput); 
-      setIsLoadingSubmit(false);
-    }
+    // if (testResult === 'Test Failed!') {
+    //   setError(true);
+    //   const finalOutput = `${testResult}\n\nExpected Output:\n${testCase.expectedOutput}`;
+    //   setOutput(finalOutput); 
+    //   setIsLoadingSubmit(false);
+    // } else {
+    //   const finalOutput = `${testResult}\n\nYour Output:\n${testCase.expectedOutput}`;
+    //   setOutput(finalOutput); 
+    //   setIsLoadingSubmit(false);
+    // }
+    const finalOutput = `There are errors on lines....${userCode}`
+
+    // want to move user focus here to output so screen reader can announce errors
+
+    setOutput(finalOutput)
+    setIsLoadingSubmit(false)
   };
 
   return (
@@ -243,19 +249,19 @@ Buzz
           {/* Compilation Button */}
           <button 
             type="button" 
-            className="CompileSubmitButton" 
+            className="CompileCheckButtons" 
             onClick={handleRun} 
             disabled={isLoadingCompile}>
             {isLoadingCompile ? 'Compiling...' : 'Compile'}
           </button>
 
-          {/* Submit Button */}
+          {/* Check Error Button */}
           <button 
             type="button" 
-            className="CompileSubmitButton" 
+            className="CompileCheckButtons" 
             onClick={handleSubmit} 
             disabled={isLoadingSubmit}>
-            {isLoadingSubmit ? 'Submitting...' : 'Submit'}
+            {isLoadingSubmit ? 'Checking for errors...' : 'Check for errors'}
           </button>
         </center>
       </div>
