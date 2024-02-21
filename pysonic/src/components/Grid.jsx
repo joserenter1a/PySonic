@@ -5,6 +5,18 @@ const GenText = () => {
   return (<input type="text" id="name" name="name" required minLength="4" maxLength="8" size="10"/>);
 }
 
+const listener = () =>{
+  const textInput = document.getElementById("textInput");
+  textInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      console.log('Enter key pressed!');
+      event.stopPropagation();
+      // Perform desired actions here
+    }
+  });
+}
+
+
 const GridComponent = ({height, width}) => {
 
   // useState hook to push into an empty array
@@ -34,9 +46,11 @@ const GridComponent = ({height, width}) => {
         {row.map((cell, colIndex) => (
           <input
             key={`${rowIndex}-${colIndex}`}
+            id="textInput"
             type="text"
             value={cell}
             onChange={(e) => handleChange(e, rowIndex, colIndex)}
+            onFocus={listener}
           />
         ))}
       </div>
@@ -49,6 +63,7 @@ export const Grid = () => {
     // javascript variables that can be used in your components i.e. count
     const [count, setCount] = useState(0);
     const [text, secText] = useState("");
+    const [focused, setFocus] = useState(false);
         // the return statement only returns html/xml components
     return (   
       <div>
@@ -58,6 +73,7 @@ export const Grid = () => {
             height = {10}
             width = {5}
           />
+        
         </div>
       </div>
     );
