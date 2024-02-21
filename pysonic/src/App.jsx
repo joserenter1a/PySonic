@@ -8,6 +8,7 @@ function App() {
 
   return (
     <>
+      <img src="/PySonicLogo.png" alt="Description of the image" width="193" height="130"></img>
       <h1>Home Page for da Code Editor</h1>
       <div className="card">
           <div>
