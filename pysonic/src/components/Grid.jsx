@@ -1,17 +1,29 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-const GenText = () => {
-  return (<input type="text" id="name" name="name" required minLength="4" maxLength="8" size="10"/>);
-}
+const setHeight = 10;
+const setWidth = 5;
 
-const listener = () =>{
-  const textInput = document.getElementById("textInput");
+const listener = (e, row, col) =>{
+  const textInput = document.getElementById(`${row}-${col}`);
   textInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-      console.log('Enter key pressed!');
-      event.stopPropagation();
-      // Perform desired actions here
+      // console.log('Enter key pressed!');
+      if (row == setHeight-1) {
+        // deal with enter on last line of text
+        // console.log("in last row");
+      }
+      else {
+        // move focus to next line
+        const rowDownText = document.getElementById(`${row+1}-${0}`);
+        rowDownText.focus();
+      }
+    }
+    else if (event.key === 'Tab'){
+      if (col == setWidth-1){
+        // console.log("At last col, don't tab to next row");
+        event.preventDefault();
+      }
     }
   });
 }
@@ -46,11 +58,11 @@ const GridComponent = ({height, width}) => {
         {row.map((cell, colIndex) => (
           <input
             key={`${rowIndex}-${colIndex}`}
-            id="textInput"
+            id= {`${rowIndex}-${colIndex}`}
             type="text"
             value={cell}
             onChange={(e) => handleChange(e, rowIndex, colIndex)}
-            onFocus={listener}
+            onFocus={(e) => listener(e, rowIndex, colIndex)}
           />
         ))}
       </div>
@@ -70,8 +82,8 @@ export const Grid = () => {
 
         <div>
           <GridComponent
-            height = {10}
-            width = {5}
+            height = {setHeight}
+            width = {setWidth}
           />
         
         </div>
