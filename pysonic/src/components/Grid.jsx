@@ -13,7 +13,7 @@ const setHeight = 25;
 const setWidth = 4;
 
 const listener = (e, row, col) =>{
-  const textInput = document.getElementById(`${row}-${col}`);
+  const textInput = document.getElementById(`${row}-${col}`); // store row, col 
   textInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       // console.log('Enter key pressed!');
@@ -36,6 +36,23 @@ const listener = (e, row, col) =>{
     }
   });
 }
+
+document.addEventListener('keydown', function (event) {
+    const isCtrlPressed = event.ctrlKey || event.metaKey; // metakey from Mac
+    if (isCtrlPressed) { // if it is a shortcut with control, then
+        switch (event.key) {
+            case "L":
+                // cut the line of code
+                alert("Test")
+            case "F7":
+            // compile the code
+            case "G":
+            // Go to specific line number
+            case "K" && "T":
+            // Enable high contrast mode
+        }
+    }
+);
 
 
 export const GridComponent = () => {
