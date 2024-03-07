@@ -37,13 +37,14 @@ const listener = (e, row, col) =>{
   });
 }
 
-document.addEventListener('keydown', function (event) {
-    const isCtrlPressed = event.ctrlKey || event.metaKey; // metakey from Mac
-    if (isCtrlPressed) { // if it is a shortcut with control, then
+// const textInput = document.getElementById('${row}-${col}');
+document.addEventListener('keydown', event => {
+    event.preventDefault();
+    if (event.ctrlKey) { // if it is a shortcut with control, then
         switch (event.key) {
             case "L":
                 // cut the line of code
-                alert("Test")
+                alert("Test");
             case "F7":
             // compile the code
             case "G":
@@ -52,7 +53,7 @@ document.addEventListener('keydown', function (event) {
             // Enable high contrast mode
         }
     }
-);
+});
 
 
 export const GridComponent = () => {
