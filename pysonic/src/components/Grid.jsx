@@ -6,6 +6,7 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-python';
 import axios from 'axios';
+import WebSpeech from '../webSpeech/Webspeech';
 
 import 'prismjs/themes/prism.css';
 const setHeight = 25;
@@ -45,6 +46,7 @@ export const GridComponent = () => {
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('5'); // Default to Python (value 5)
   const [error, setError] = useState('');
+  const [currentCell, setCurrentCell] = useState({ row: -1, col: -1 });
   
   const handleRun = async () => {
     setIsLoadingCompile(true);
@@ -113,6 +115,14 @@ export const GridComponent = () => {
     );
     setArray(newArray);
     setCode(newArray.map(row => row.join(' ')).join('\n'));
+    
+    //announces cell user is in
+    if (currentCell.row !== rowIndex || currentCell.col !== colIndex)
+    {
+      // user changed cells announce the new position
+      WebSpeech.speak(`You are in row ${rowIndex + 1}, column ${colIndex + 1}`);
+      setCurrentCell({ row: rowIndex, col: colIndex });
+    }
 
   }
   // returns the array maps to a div with a text input for each cell, with the key
