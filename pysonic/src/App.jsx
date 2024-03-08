@@ -11,7 +11,10 @@ function App() {
       <div >
         
           <div
-            style={gridStyle}
+            style={{gridStyle,
+            width: '1200px', 
+            height: '600px'
+          }}
           >
             <GridComponent
 

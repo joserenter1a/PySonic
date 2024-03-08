@@ -154,7 +154,7 @@ export const GridComponent = () => {
       <div key={rowIndex}>
           <div style = {{float:'left', 
         paddingLeft: '10px',
-        width:'200px'}}></div>
+        width:'450px'}}></div>
         {row.map((cell, colIndex) => (
           <input
             key={`${rowIndex}-${colIndex}`}
@@ -171,7 +171,7 @@ export const GridComponent = () => {
 
   </div>
     <div
-      style={{paddingRight:'10px'}}
+      style={{paddingRight:'30px'}}
       >        
         <Editor 
           value={code}
@@ -184,7 +184,7 @@ export const GridComponent = () => {
             fontFamily: '"Fira code", "Fira Mono", monospace',
             fontSize: 14,
             color: 'gray',
-            height: '100%',
+            height:'500px',
             backgroundColor: '#171717',
             
             width:'300px',
@@ -202,7 +202,7 @@ export const GridComponent = () => {
     
     <div
           className='output'
-          style={{ display: 'flex', gap: '10px', width: '300px', height: '300px' }}
+          style={{ display: 'flex', paddingRight:'15px', gap: '10px', width: '300px', height: '300px' }}
         >
         {/* Text area for code output */}
         <textarea
@@ -217,6 +217,7 @@ export const GridComponent = () => {
             color: error ? 'red' : 'black',
             backgroundColor: error ? '#ffebeb' : 'white',
             paddingLeft:'10px',
+            paddingRight:'15px',
             width:'300px'
           }}
           />
