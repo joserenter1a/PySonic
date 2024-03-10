@@ -120,11 +120,50 @@ export const GridComponent = () => {
     if (currentCell.row !== rowIndex || currentCell.col !== colIndex)
     {
       // user changed cells announce the new position
-      WebSpeech.speak(`You are in row ${rowIndex + 1}, column ${colIndex + 1}`);
+      const cursorPosition = e.target.selectionStart;
+      WebSpeech.speak(`You are in row ${rowIndex + 1}, column ${colIndex + 1}, character ${cursorPosition}`);
       setCurrentCell({ row: rowIndex, col: colIndex });
     }
-
+    
   }
+
+  //to keep track cursor movement with in a cell
+  const handleArrowKeys = (e, rowIndex, colIndex) => {
+    const cursorPosition = e.target.selectionStart;
+    let newCursorPosition;
+  
+    switch (e.key) {
+      case 'ArrowUp':
+        if (cursorPosition >= setWidth) {
+          newCursorPosition = cursorPosition - setWidth;
+        }
+        break;
+      case 'ArrowDown':
+        if (cursorPosition + setWidth <= e.target.value.length) {
+          newCursorPosition = cursorPosition + setWidth;
+        }
+        break;
+      case 'ArrowLeft':
+        if (cursorPosition > 0) {
+          newCursorPosition = cursorPosition - 1;
+        }
+        break;
+      case 'ArrowRight':
+        if (cursorPosition < e.target.value.length) {
+          newCursorPosition = cursorPosition + 1;
+        }
+        break;
+      default:
+        break;
+    }
+  
+    if (newCursorPosition !== undefined) {
+      e.preventDefault();
+      e.target.setSelectionRange(newCursorPosition, newCursorPosition);
+      WebSpeech.speak(`character ${newCursorPosition + 1}`);
+    }
+  };
+
   // returns the array maps to a div with a text input for each cell, with the key
   // being the difference of indices
   return (
@@ -145,7 +184,13 @@ export const GridComponent = () => {
             value={cell}
             size = {10}
             onChange={(e) => handleChange(e, rowIndex, colIndex)}
-            onFocus={(e) => listener(e, rowIndex, colIndex)}
+            onFocus={(e) => {
+              listener(e, rowIndex, colIndex);
+              const cursorPosition = e.target.selectionStart;
+              WebSpeech.speak(`You are in row ${rowIndex + 1}, column ${colIndex + 1}, character ${cursorPosition}`);
+              setCurrentCell({ row: rowIndex, col: colIndex });
+          }}
+            onKeyDown={(e) => handleArrowKeys(e, rowIndex, colIndex)}
           />
         ))}
       </div>
