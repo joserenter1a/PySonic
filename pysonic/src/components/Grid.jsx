@@ -166,7 +166,7 @@ export const GridComponent = () => {
     {
       // user changed cells announce the new position
       const cursorPosition = e.target.selectionStart;
-      WebSpeech.speak(`row ${rowIndex}, column ${colIndex + 1}`);
+      WebSpeech.speak(`line ${rowIndex}, indent ${colIndex}`);
       setCurrentCell({ row: rowIndex, col: colIndex });
     }
     
@@ -232,7 +232,7 @@ export const GridComponent = () => {
             onFocus={(e) => {
               listener(e, rowIndex, colIndex);
               const cursorPosition = e.target.selectionStart;
-              WebSpeech.speak(`row ${rowIndex + 1}, column ${colIndex + 1}`);
+              WebSpeech.speak(`line ${rowIndex + 1}, indent ${colIndex}`);
               setCurrentCell({ row: rowIndex, col: colIndex });
           }}
             onKeyDown={(e) => handleArrowKeys(e, rowIndex, colIndex)}
