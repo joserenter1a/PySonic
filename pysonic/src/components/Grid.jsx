@@ -43,7 +43,7 @@ export const GridComponent = () => {
 
   const [output, setOutput] = useState('');
   const [isLoadingCompile, setIsLoadingCompile] = useState(false);
-  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+  const [isLoadingErrorCheck, setIsLoadingErrorCheck] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('5'); // Default to Python (value 5)
   const [error, setError] = useState('');
   const [currentCell, setCurrentCell] = useState({ row: -1, col: -1 });
@@ -88,15 +88,68 @@ export const GridComponent = () => {
   };
 
   const handleSubmit = async () => {
-    setIsLoadingSubmit(true);
-    const userCode = code;
-    const finalOutput = `There are errors on lines....${userCode}`
+    // setIsLoadingSubmit(true);
+    // const userCode = code;
+    // const finalOutput = `There are errors on lines....${userCode}`
 
-    // want to move user focus here to output so screen reader can announce errors
+    // // want to move user focus here to output so screen reader can announce errors
 
-    setOutput(finalOutput)
-    setIsLoadingSubmit(false)
+    // setOutput(finalOutput)
+    // setIsLoadingSubmit(false)
+    setIsLoadingErrorCheck(true);
+    setError(''); // Clear any previous errors
+
+    const encodedParams = new URLSearchParams();
+    encodedParams.set('LanguageChoice', selectedLanguage);
+    encodedParams.set('Program', code);
+
+    const options = {
+      method: 'POST',
+      url: 'https://code-compiler.p.rapidapi.com/v2',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-RapidAPI-Key': 'c40e63ca05msh21cc53be5c61ed5p1be771jsnda85c9acad28',
+        'X-RapidAPI-Host': 'code-compiler.p.rapidapi.com'
+      },
+      data: encodedParams,
+    };
+
+    try {
+      const response = await axios.request(options);
+      const errorOutput = response.data.Errors;
+      let finalErrorResponse = '';
+
+      // if there is an error
+      if (errorOutput) {
+        const splitLine = errorOutput.split(" ");
+        const splitError = errorOutput.split("\n");
+        // find line of error
+        for (let i = 0; i < splitLine.length; i++) {
+          if (splitLine[i] == "line") {
+            finalErrorResponse = "There is an error on " + splitLine[i] + " " + splitLine[i+1];
+          }
+        }
+        // find type of error
+        for (let i = 0; i < splitError.length; i++) {
+          if (splitError[i].includes("Error")) {
+            finalErrorResponse = finalErrorResponse + "\n" + splitError[i];
+          }
+        }
+        // set output for given error
+        setOutput(finalErrorResponse);
+        setError(finalErrorResponse);
+      } else {
+        setOutput("There were no errors found.");
+        setError('');
+      }
+    } catch (error) {
+      console.error(error);
+      setError('Error compiling code. Please check your code and try again.');
+    }
+
+    setIsLoadingErrorCheck(false);
   };
+  
   // useState hook to push into an empty array
   const [array, setArray] = useState(() => {
       const emptyArray = [];
@@ -267,8 +320,8 @@ export const GridComponent = () => {
             type="button" 
             className="CompileCheckButtons" 
             onClick={handleSubmit} 
-            disabled={isLoadingSubmit}>
-            {isLoadingSubmit ? 'Checking for errors...' : 'Check for errors'}
+            disabled={isLoadingErrorCheck}>
+            {isLoadingErrorCheck ? 'Checking for errors...' : 'Check for errors'}
           </button>
         </center>
       </div>
