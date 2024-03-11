@@ -31,6 +31,7 @@ const listener = (e, row, col) =>{
     }
     else if (event.key === 'F1' )
     {
+      event.preventDefault();
       const rowDownText = document.getElementById(`${0}-${0}`);
       rowDownText.focus();
     }
@@ -39,7 +40,7 @@ const listener = (e, row, col) =>{
 
 // const textInput = document.getElementById('${row}-${col}');
 document.addEventListener('keydown', event => {
-    event.preventDefault();
+    // event.preventDefault();
     if (event.ctrlKey) { // if it is a shortcut with control, then
         switch (event.key) {
             case "L":
@@ -60,7 +61,6 @@ document.addEventListener('keydown', event => {
                 break;
             case "M":
                 // check for errors
-                alert("Test");
                 handleMShortcut();
                 break;
             case "6":
@@ -107,16 +107,20 @@ export const handleMShortcut = () => {
 }
 
 export const handleGShortcut = () => {
-    alert("yo!");
+    event.preventDefault();
     var lineNumber = prompt('Enter line number:'); // TODO: PROMPT FOR VALID LINE NUMBERS ONLY 
     lineNumber = parseInt(lineNumber);
     if (!isNaN(lineNumber) && lineNumber > 0) {
-        const rowDownText = document.getElementById(`${lineNumber}-${0}`);
+        const rowDownText = document.getElementById(`${lineNumber-1}-${0}`);
         rowDownText.focus();
     }
     else {
         alert("Please enter a valid line number.");
     }
+}
+
+export const handleReadShortcut = () => {
+
 }
 export const GridComponent = () => {
   const [code, setCode] = useState('');
