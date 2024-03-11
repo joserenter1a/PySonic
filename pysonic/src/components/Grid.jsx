@@ -10,7 +10,7 @@ import WebSpeech from '../webSpeech/Webspeech';
 
 import 'prismjs/themes/prism.css';
 const setHeight = 25;
-const setWidth = 4;
+const setWidth = 5;
 
 const listener = (e, row, col) =>{
   const textInput = document.getElementById(`${row}-${col}`); // store row, col 
