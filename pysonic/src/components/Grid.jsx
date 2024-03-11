@@ -193,7 +193,7 @@ export const GridComponent = () => {
       <div key={rowIndex}>
           <div style = {{float:'left', 
         paddingLeft: '10px',
-        width:'450px'}}></div>
+        width:'450px',}}></div>
         {row.map((cell, colIndex) => (
           <input
             key={`${rowIndex}-${colIndex}`}
@@ -263,7 +263,8 @@ export const GridComponent = () => {
             backgroundColor: error ? '#ffebeb' : 'white',
             paddingLeft:'10px',
             paddingRight:'15px',
-            width:'300px'
+            width:'300px',
+            height: '500px'
           }}
           />
       
