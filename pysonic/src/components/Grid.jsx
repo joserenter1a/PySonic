@@ -13,7 +13,7 @@ const setHeight = 25;
 const setWidth = 5;
 
 const listener = (e, row, col) =>{
-  const textInput = document.getElementById(`${row}-${col}`); // store row, col 
+  const textInput = document.getElementById(`${row}-${col}`); 
   textInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       // console.log('Enter key pressed!');
@@ -39,23 +39,96 @@ const listener = (e, row, col) =>{
 
 // const textInput = document.getElementById('${row}-${col}');
 document.addEventListener('keydown', event => {
+    let isHome = 0;  // defines if goto is used to specify line number, or just go to the first line.
     event.preventDefault();
     if (event.ctrlKey) { // if it is a shortcut with control, then
         switch (event.key) {
             case "L":
                 // cut the line of code
-                alert("Test");
+                handleLShortcut();
             case "F7":
-            // compile the code
+                // compile the code
+                handleFShortcut();
             case "G":
-            // Go to specific line number
+                // Go to specific line number
+                home = 1;
             case "K" && "T":
-            // Enable high contrast mode
+                // Enable high contrast mode
+                alert("Test");
+            case "M":
+                // check for errors
+                alert("Test");
+            case "6":
+                // navigate to page with shortcuts listed
+                alert("Test");
+            case "7":
+                // read the output
+                alert("Test");
         }
     }
+    else {
+        if (event.keyCode === 36) {
+            home = 2;
+        }
+    }
+    if (home > 0) { handleGShortcut(home); }
 });
 
 
+export const handleLShortcut = () => {
+    // alert("Yo!");
+    let codeVar = document.getElementById('code'); // define the id for the code input as code, this will return a string
+    console.log(codeVar);
+    if (codeVar === null) {
+        return 0;
+    }
+    else {
+        var lines = codeVar.split('\n'); // if not null, then split
+        console.log(lines);
+        lines.splice(currLine, 1, '\0');
+    }
+}
+
+export const handleFShortcut = () => {
+    // Assuming your button has a class name "CompileCheckButtons"
+    alert("yo!");
+    var compileButtons = document.getElementsByClassName("CompileCheckButtons");
+
+    // Check if at least one button element is found
+    if (compileButtons.length > 0) {
+        // Trigger a click on the first button (you may adjust the index if there are multiple buttons)
+        compileButtons[0].click();
+    } else {
+        console.error("No code to compile");
+    }
+}
+
+export const handleMShortcut = () => {
+    // Assuming your button has a class name "CompileCheckButtons"
+    alert("yo!");
+    var compileButtons = document.getElementsByClassName("CompileCheckButtons");
+
+    // Check if at least one button element is found
+    if (compileButtons.length > 1) {
+        // Trigger a click on the first button (you may adjust the index if there are multiple buttons)
+        compileButtons[1].click();
+    } else {
+        console.error("No code to error-check.");
+    }
+}
+
+export const handleHomeShortcut = (home) => {
+    if (home === 1) { // goto with line number
+        var lineNumber = prompt('Enter line number:'); // TODO: PROMPT FOR VALID LINE NUMBERS ONLY 
+        lineNumber = parseInt(lineNumber);
+        if (!isNaN(lineNumber) && lineNumber > 0) { 
+
+        }
+    }
+    else if (home === 2) { // pressed home, go to the top of the code
+
+    }
+}
 export const GridComponent = () => {
   const [code, setCode] = useState('');
 
@@ -319,14 +392,14 @@ export const GridComponent = () => {
           {/* Compilation Button */}
           <button 
             type="button" 
-            className="CompileCheckButtons" 
+            className="CompileCheckButtons"
             onClick={handleRun} 
             disabled={isLoadingCompile}>
             {isLoadingCompile ? 'Compiling...' : 'Compile'}
           </button>
 
           {/* Check Error Button */}
-          <button 
+          <button
             type="button" 
             className="CompileCheckButtons" 
             onClick={handleSubmit} 
