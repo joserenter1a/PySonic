@@ -88,14 +88,6 @@ export const GridComponent = () => {
   };
 
   const handleSubmit = async () => {
-    // setIsLoadingSubmit(true);
-    // const userCode = code;
-    // const finalOutput = `There are errors on lines....${userCode}`
-
-    // // want to move user focus here to output so screen reader can announce errors
-
-    // setOutput(finalOutput)
-    // setIsLoadingSubmit(false)
     setIsLoadingErrorCheck(true);
     setError(''); // Clear any previous errors
 
@@ -228,7 +220,7 @@ export const GridComponent = () => {
       <div key={rowIndex}>
           <div style = {{float:'left', 
         paddingLeft: '10px',
-        width:'450px',}}></div>
+        width:'550px',}}></div>
         {row.map((cell, colIndex) => (
           <input
             key={`${rowIndex}-${colIndex}`}
