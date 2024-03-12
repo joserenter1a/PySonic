@@ -295,7 +295,7 @@ export const GridComponent = () => {
       // Set a new timeout to announce the character position
       timeoutId = setTimeout(() => {
         WebSpeech.speak(`character ${newCursorPosition + 1}`);
-      }, 300); //timeout delay
+      }, 600); //timeout delay
     }
   };
   
@@ -328,7 +328,7 @@ export const GridComponent = () => {
               focusTimeoutId = setTimeout(() => {
                 WebSpeech.speak(`line ${rowIndex + 1}, indent ${colIndex}`);
                 setCurrentCell({ row: rowIndex, col: colIndex });
-              }, 300);
+              }, 3000);
           }}
             onKeyDown={(e) => handleArrowKeys(e, rowIndex, colIndex)}
           />
