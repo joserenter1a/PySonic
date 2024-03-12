@@ -40,8 +40,8 @@ const listener = (e, row, col) =>{
 
 // const textInput = document.getElementById('${row}-${col}');
 document.addEventListener('keydown', event => {
-    // event.preventDefault();
     if (event.ctrlKey) { // if it is a shortcut with control, then
+        event.preventDefault();
         switch (event.key) {
             case "L":
                 // cut the line of code
@@ -64,8 +64,8 @@ document.addEventListener('keydown', event => {
                 handleMShortcut();
                 break;
             case "6":
-                // navigate to page with shortcuts listed
-                alert("Test");
+                // open shortcut list
+                window.open("./Shortcuts.html","_blank").focus();
                 break;
             case "7":
                 // read the output
@@ -122,6 +122,7 @@ export const handleGShortcut = () => {
 export const handleReadShortcut = () => {
 
 }
+
 export const GridComponent = () => {
   const [code, setCode] = useState('');
 
