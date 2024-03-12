@@ -254,6 +254,8 @@ export const GridComponent = () => {
   }
 
   //to keep track cursor movement with in a cell
+  let timeoutId;
+
   const handleArrowKeys = (e, rowIndex, colIndex) => {
     const cursorPosition = e.target.selectionStart;
     let newCursorPosition;
@@ -286,9 +288,18 @@ export const GridComponent = () => {
     if (newCursorPosition !== undefined) {
       e.preventDefault();
       e.target.setSelectionRange(newCursorPosition, newCursorPosition);
-      WebSpeech.speak(`character ${newCursorPosition + 1}`);
+  
+      // Clear any existing timeout
+      clearTimeout(timeoutId);
+  
+      // Set a new timeout to announce the character position
+      timeoutId = setTimeout(() => {
+        WebSpeech.speak(`character ${newCursorPosition + 1}`);
+      }, 300); //timeout delay
     }
   };
+  
+  let focusTimeoutId;
 
   // returns the array maps to a div with a text input for each cell, with the key
   // being the difference of indices
@@ -313,8 +324,11 @@ export const GridComponent = () => {
             onFocus={(e) => {
               listener(e, rowIndex, colIndex);
               const cursorPosition = e.target.selectionStart;
-              WebSpeech.speak(`line ${rowIndex + 1}, indent ${colIndex}`);
-              setCurrentCell({ row: rowIndex, col: colIndex });
+              clearTimeout(focusTimeoutId);
+              focusTimeoutId = setTimeout(() => {
+                WebSpeech.speak(`line ${rowIndex + 1}, indent ${colIndex}`);
+                setCurrentCell({ row: rowIndex, col: colIndex });
+              }, 300);
           }}
             onKeyDown={(e) => handleArrowKeys(e, rowIndex, colIndex)}
           />
