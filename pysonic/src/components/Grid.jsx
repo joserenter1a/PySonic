@@ -15,26 +15,30 @@ const setWidth = 5;
 const listener = (e, row, col) =>{
   const textInput = document.getElementById(`${row}-${col}`); 
   textInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      // console.log('Enter key pressed!');
-      if (row == setHeight-1) {
-        // deal with enter on last line of text
-        // console.log("in last row");
+      if (event.key === 'Enter') {
+          // console.log('Enter key pressed!');
+          if (row == setHeight - 1) {
+              // deal with enter on last line of text
+              // console.log("in last row");
+          }
+          else {
+              // move focus to next line
+              const rowDownText = document.getElementById(`${row + 1}-${0}`);
+              //textInput.append('\n');
+              console.log(textInput);
+              rowDownText.focus();
+          }
       }
-      else {
-        // move focus to next line
-        const rowDownText = document.getElementById(`${row+1}-${0}`);
-        //textInput.append('\n');
-        console.log(textInput);
-        rowDownText.focus();
+      else if (event.key === 'F1') {
+          event.preventDefault();
+          const rowDownText = document.getElementById(`${0}-${0}`);
+          rowDownText.focus();
       }
-    }
-    else if (event.key === 'F1' )
-    {
-      event.preventDefault();
-      const rowDownText = document.getElementById(`${0}-${0}`);
-      rowDownText.focus();
-    }
+      //else if (event.key === 'F2') { // go to end of the code
+      //    event.preventDefault();
+      //    const rowDownText = document.getElementById(`${row}-${col}`);
+      //    rowDowntext.focus();
+      //}
   });
 }
 
@@ -55,10 +59,10 @@ document.addEventListener('keydown', event => {
                 // Go to specific line number
                 handleGShortcut();
                 break;
-            case "K" && "T":
-                // Enable high contrast mode
-                alert("Test");
-                break;
+            //case "K" && "T":
+            //    // Enable high contrast mode
+            //    alert("Test");
+            //    break;
             case "M":
                 // check for errors
                 handleMShortcut();
@@ -66,10 +70,6 @@ document.addEventListener('keydown', event => {
             case "6":
                 // open shortcut list
                 window.open("./Shortcuts.html","_blank").focus();
-                break;
-            case "7":
-                // read the output
-                alert("Test");
                 break;
         }
     }
@@ -117,10 +117,6 @@ export const handleGShortcut = () => {
     else {
         alert("Please enter a valid line number.");
     }
-}
-
-export const handleReadShortcut = () => {
-
 }
 
 export const GridComponent = () => {
