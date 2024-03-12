@@ -166,6 +166,7 @@ export const GridComponent = () => {
     }
 
     setIsLoadingCompile(false);
+    document.getElementById("output").focus();
   };
 
   const handleSubmit = async () => {
@@ -221,6 +222,7 @@ export const GridComponent = () => {
     }
 
     setIsLoadingErrorCheck(false);
+    document.getElementById("output").focus();
   };
   
   // useState hook to push into an empty array
