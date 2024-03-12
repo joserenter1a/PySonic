@@ -4,6 +4,7 @@ A web-based code editor for BLV (blind and low-vision) beginner programmers.
 Authors: Leo Abrahamian, Carson Hellman, Joseph Macalinao, Cameron O’Connor, Jose Renteria
 
 Created on February 21st, 2024
+
 A project for CS422 - Software Methodologies
 
 ### Project Setup / Installation
