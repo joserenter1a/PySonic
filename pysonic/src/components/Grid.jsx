@@ -16,42 +16,28 @@ const listener = (e, row, col) =>{
   const textInput = document.getElementById(`${row}-${col}`); 
   textInput.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
-          // console.log('Enter key pressed!');
           if (row == setHeight - 1) {
               // deal with enter on last line of text
-              // console.log("in last row");
           }
           else {
               // move focus to next line
               const rowDownText = document.getElementById(`${row + 1}-${0}`);
-              //textInput.append('\n');
-              console.log(textInput);
               rowDownText.focus();
           }
       }
-      else if (event.key === 'F1') {
-          event.preventDefault();
-          const rowDownText = document.getElementById(`${0}-${0}`);
-          rowDownText.focus();
-      }
-      //else if (event.key === 'F2') { // go to end of the code
-      //    event.preventDefault();
-      //    const rowDownText = document.getElementById(`${row}-${col}`);
-      //    rowDowntext.focus();
-      //}
   });
 }
 
-// const textInput = document.getElementById('${row}-${col}');
 document.addEventListener('keydown', event => {
     if (event.ctrlKey) { // if it is a shortcut with control, then
         event.preventDefault();
+        const rowDownText = document.getElementById(`${0}-${0}`); // to get top of file for Home shortcut
         switch (event.key) {
-            case "L":
+            case "X":
                 // cut the line of code
                 handleLShortcut();
                 break;
-            case "F7":
+            case "F5":
                 // compile the code
                 handleFShortcut();
                 break;
@@ -59,25 +45,22 @@ document.addEventListener('keydown', event => {
                 // Go to specific line number
                 handleGShortcut();
                 break;
-            //case "K" && "T":
-            //    // Enable high contrast mode
-            //    alert("Test");
-            //    break;
             case "M":
                 // check for errors
                 handleMShortcut();
                 break;
-            case "6":
+            case "S":
                 // open shortcut list
                 window.open("./Shortcuts.html","_blank").focus();
                 break;
+            case "Home":
+                rowDownText.focus();
         }
     }
 });
 
 
 export const handleLShortcut = () => {
-    // alert("Yo!");
     let codeVar = document.getElementById('code'); // define the id for the code input as code, this will return a string
     console.log(codeVar);
     if (codeVar === null) {
@@ -91,19 +74,18 @@ export const handleLShortcut = () => {
 }
 
 export const handleFShortcut = () => {
-    // alert("yo!");
     var compileButtons = document.getElementsByClassName("CompileCheckButtons");
 
     // Trigger a click on the first button 
     compileButtons[0].click();
-    WebSpeech.speak("Compiling");
+    // WebSpeech.speak("Compiling");
 }
 
 export const handleMShortcut = () => {
     // Assuming your button has a class name "CompileCheckButtons"
     var compileButtons = document.getElementsByClassName("CompileCheckButtons");
     compileButtons[1].click();
-    WebSpeech.speak("Error checking");
+    // WebSpeech.speak("Error checking");
 }
 
 export const handleGShortcut = () => {
