@@ -35,7 +35,7 @@ document.addEventListener('keydown', event => {
         switch (event.key) {
             case "X":
                 // cut the line of code
-                handleLShortcut();
+                // handleXShortcut();
                 break;
             case "F5":
                 // compile the code
@@ -51,27 +51,29 @@ document.addEventListener('keydown', event => {
                 break;
             case "S":
                 // open shortcut list
-                window.open("./Shortcuts.html","_blank").focus();
+                var btnmodal = document.getElementsByClassName("btn-modal");
+                btnmodal[0].click();
                 break;
             case "Home":
                 rowDownText.focus();
+                break;
         }
     }
 });
 
 
-export const handleLShortcut = () => {
-    let codeVar = document.getElementById('code'); // define the id for the code input as code, this will return a string
-    console.log(codeVar);
-    if (codeVar === null) {
-        return 0;
-    }
-    else {
-        var lines = codeVar.split('\n'); // if not null, then split
-        console.log(lines);
-        lines.splice(currLine, 1, '\0');
-    }
-}
+//export const handleXShortcut = () => {
+//    let codeVar = document.getElementById('code'); // define the id for the code input as code, this will return a string
+//    console.log(codeVar);
+//    if (codeVar === null) {
+//        return 0;
+//    }
+//    else {
+//        var lines = codeVar.split('\n'); // if not null, then split
+//        console.log(lines);
+//        lines.splice(currLine, 1, '\0');
+//    }
+//}
 
 export const handleFShortcut = () => {
     var compileButtons = document.getElementsByClassName("CompileCheckButtons");

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import './App.css'
 // import custom component to embed in our application container
-import GridComponent  from './components/Grid';
+import GridComponent from './components/Grid';
+import Modal from './components/Modal'
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
             />
           </div>
       </div>
-
+      <Modal />
 
     </>
   )
