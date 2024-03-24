@@ -12,7 +12,7 @@ A project for CS422 - Software Methodologies
 When cloning the Repo, make sure you have **node/npm** installed. 
 Version 18+
 
-- [Installation Instructions] (https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) can be found here. 
+- [Installation Instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) can be found here. 
 
 Once **node** is installed, you need to install the project dependencies before you can run the program. 
 - Run `npm install` from the root directory. This will install necessary dependencies and you should see a message **similar** to this:
