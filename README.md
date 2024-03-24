@@ -1,4 +1,5 @@
 ## PySonic: Python Editor
+![PySonic Window](PySonic_SS.png)
 A web-based code editor for BLV (blind and low-vision) beginner programmers.
 
 Authors: Leo Abrahamian, Carson Hellman, Joseph Macalinao, Cameron O’Connor, Jose Renteria
